@@ -90,17 +90,14 @@ public class UploadDocumentPage {
 		select.selectByIndex(1);
 		
 		documentAttribute.click();
-		waitHelper.setImplicitWait(60, null);
 		documentAttribute1.click();
 		waitHelper.setImplicitWait(60, null);
 		buttonArrow.click();
-		waitHelper.setImplicitWait(60, null);
 		buttonOk.click();
 		waitHelper.setImplicitWait(60, null);
 		jexe.executeScript("window.scrollBy(0,500)", "");
 		waitHelper.setImplicitWait(60, null);
 		chooseSource.click();
-		waitHelper.setImplicitWait(60, null);
 		List<WebElement> options = driver.findElements(By.xpath("//ul[@class='uiMenu']/li"));
 	     for (WebElement opt : options) {
 	         if (opt.getText().equals("Upload file from your computer")) {
@@ -116,7 +113,6 @@ public class UploadDocumentPage {
 	         }
 	     }
 	     log.info("click upload button...");
-	     waitHelper.setImplicitWait(60, null);
 	     btnupload.click();
 	     waitHelper.setImplicitWait(60, null);
 		 driver.switchTo().defaultContent();

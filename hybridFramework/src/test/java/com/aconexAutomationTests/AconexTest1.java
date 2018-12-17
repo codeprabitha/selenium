@@ -1,6 +1,7 @@
 package com.aconexAutomationTests;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.log4j.Logger;
 import org.testng.Assert;
@@ -10,6 +11,7 @@ import org.testng.annotations.Test;
 import com.aconexAutomation.helper.LoggerHelper;
 import com.aconexAutomation.helper.WaitHelper;
 import com.aconexAutomation.pageObjects.DocumentRegisterPage;
+import com.aconexAutomation.pageObjects.EmailPage;
 import com.aconexAutomation.pageObjects.HotelVIPResortPage;
 import com.aconexAutomation.pageObjects.LoginPage;
 import com.aconexAutomation.pageObjects.UploadDocumentPage;
@@ -17,24 +19,29 @@ import com.aconexAutomation.pageObjects.WorldGamesPage;
 import com.aconexAutomation.testBase.Config;
 import com.aconexAutomation.testBase.TestBase;
 
-public class AconexTests extends TestBase {
+public class AconexTest1 extends TestBase {
 
-	private final Logger log = LoggerHelper.getLogger(AconexTests.class);
+	private final Logger log = LoggerHelper.getLogger(AconexTest1.class);
 	WaitHelper wait;
 	LoginPage loginPage;
 	HotelVIPResortPage hotelVIPResortPage;
 	DocumentRegisterPage DocumentRegisterPage;
 	UploadDocumentPage uploadDocumentPage;
 	WorldGamesPage worldGamesPage;
+	EmailPage emailPage;
 	long docNum;
 	boolean actualCountval;
 
-	@BeforeMethod
-	public void testLoginToAconex() {
+	
 
+	@Test(enabled = true)
+	public void testHotelVIPResprt() throws InterruptedException, IOException {
+		
 		log.info(LoginPage.class.getName() + " started");
 		Config config = new Config(OR);
+
 		driver.get(config.getWebsite());
+		
 		driver.manage().window().maximize();
 
 		loginPage = new LoginPage(driver);
@@ -48,11 +55,6 @@ public class AconexTests extends TestBase {
 		} else {
 			Assert.assertTrue(false, "login is not sucessful");
 		}
-
-	}
-
-	@Test(enabled=false)
-	public void testHotelVIPResprt() throws InterruptedException, IOException {
 
 		loginPage.clickprojectChangerArrow();
 
@@ -93,39 +95,6 @@ public class AconexTests extends TestBase {
 		log.info("actual Document number------------" + actualResult);
 		Assert.assertEquals(actualResult, strdocNum);
 
-	}
-
-	@Test(enabled=true)
-	public void testWordGames() {
-
-		loginPage.clickprojectChangerArrow();
-
-		loginPage.clickworldGames();
-		
-
-		boolean projectselstatus = loginPage.verifyProjectSelectedPageWorldgames();
-		if (projectselstatus) {
-			log.info("World games is clicked successfully");
-
-		} else {
-			Assert.assertTrue(false, "clicking World games is not sucessful");
-		}
-
-		log.info(WorldGamesPage.class.getName() + " started");
-		worldGamesPage = new WorldGamesPage(driver);
-		
-		worldGamesPage.clickWorkFlow();
-		
-		worldGamesPage.clickWorkFlowAssigned();
-
-	   actualCountval = worldGamesPage.getWorkFlowsfromTable();
-		if (actualCountval) {
-			log.info("World games is clicked successfully");
-
-		} else {
-			Assert.assertTrue(false, "World games is not sucessful");
-		}
 
 	}
-
 }

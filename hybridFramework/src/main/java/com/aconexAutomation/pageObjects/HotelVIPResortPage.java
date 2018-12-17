@@ -25,7 +25,12 @@ public class HotelVIPResortPage {
 	
 	@FindBy(xpath = "//div[@id='nav-bar-DOC-DOC-SEARCH']")
 	WebElement documentRegister;
-
+	
+	@FindBy(xpath = "//button[@id='nav-bar-CORRESPONDENCE']")
+	WebElement mail;
+	
+	@FindBy(xpath = "//div[@id='nav-bar-CORRESPONDENCE-CORRESPONDENCE-CREATEMAIL']")
+	WebElement blankMail;
 
 	public HotelVIPResortPage(WebDriver driver) {
 		this.driver = driver;
@@ -47,6 +52,17 @@ public class HotelVIPResortPage {
 	public void clickDocumentRegister() {
 		log.info("click on document register...");
 		documentRegister.click();
+	}
+	
+
+	public void clickMail() {
+		log.info("click Mail...");
+		mail.click();
+	}
+	
+	public void clickBlankMail() {
+		log.info("click Blank Mail...");
+		blankMail.click();
 	}
 }
 
